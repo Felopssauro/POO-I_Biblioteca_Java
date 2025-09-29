@@ -4,56 +4,53 @@
  */
 package entidades;
 
+import java.time.LocalDate;
 /**
  *
  * @author felops
  */
 public class Compra {
-    private int ID;
-    private int ID_cliente;
-    private int ISBN_livro;
-    private String date; // qual seria a melhor forma de armazenar date? 
+    private int id;
+    private int idCliente;
+    private String isbn; 
+    private LocalDate data;
 
-    public Compra(int ID, int ID_cliente, int ISBN_livro, String date) {
-        this.ID = ID;
-        this.ID_cliente = ID_cliente;
-        this.ISBN_livro = ISBN_livro;
-        this.date = date;
+    public Compra(int id, int idCliente, String isbn, LocalDate data) {
+        this.id = id;
+        this.idCliente = idCliente;
+        this.isbn = isbn;
+        this.data = data;
     }
 
-    
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getID_cliente() {
-        return ID_cliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setID_cliente(int ID_cliente) {
-        this.ID_cliente = ID_cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public int getISBN_livro() {
-        return ISBN_livro;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN_livro(int ISBN_livro) {
-        this.ISBN_livro = ISBN_livro;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-    
-    
-    
+    public void setData(LocalDate data) {
+        this.data = data;
+    }   
 }
