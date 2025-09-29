@@ -8,35 +8,38 @@ package entidades;
  *
  * @author felops
  */
+
 public class Livro {
-    private int ISBN;
-    private int ID_editora;
+    private String isbn; 
+    private String titulo; 
     private String autor;
     private String assunto;
-    private int qntde_livro;
+    private Editora editora; 
+    private int quantidadeEmEstoque;
 
-    public Livro(int ISBN, int ID_editora, String autor, String assunto, int qntde_livro) {
-        this.ISBN = ISBN;
-        this.ID_editora = ID_editora;
+    public Livro(String isbn, String titulo, String autor, String assunto, Editora editora, int quantidadeEmEstoque) {
+        this.isbn = isbn;
+        this.titulo = titulo;
         this.autor = autor;
         this.assunto = assunto;
-        this.qntde_livro = qntde_livro;
+        this.editora = editora;
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
     }
 
-    public int getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(int ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public int getID_editora() {
-        return ID_editora;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setID_editora(int ID_editora) {
-        this.ID_editora = ID_editora;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getAutor() {
@@ -55,13 +58,25 @@ public class Livro {
         this.assunto = assunto;
     }
 
-    public int getQntde_livro() {
-        return qntde_livro;
+    public Editora getEditora() {
+        return editora;
     }
 
-    public void setQntde_livro(int qntde_livro) {
-        this.qntde_livro = qntde_livro;
+    public void setEditora(Editora editora) {
+        this.editora = editora;
     }
-    
+
+    public int getQuantidadeEmEstoque() {
+        return quantidadeEmEstoque;
+    }
+
+    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
+        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    }
+
+    @Override
+    public String toString() {
+        return this.titulo;
+    }
     
 }

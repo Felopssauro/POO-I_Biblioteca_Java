@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
-
+import javax.swing.JOptionPane;
+import entidades.Livro;
+import controles.LivroControle;
+import controles.EditoraControle;
+import entidades.Editora;
+import java.util.List;
 /**
  *
  * @author ananda
@@ -17,7 +22,19 @@ public class Cadastro_Livros extends javax.swing.JFrame {
      */
     public Cadastro_Livros() {
         initComponents();
+        carregarEditoras();
     }
+    
+    private void carregarEditoras() {
+    EditoraControle controle = new EditoraControle();
+    List<Editora> listaDeEditoras = controle.listarTodas();
+    
+    comboEditora.removeAllItems();
+    
+    for (Editora editora : listaDeEditoras) {
+        comboEditora.addItem(editora);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,17 +50,17 @@ public class Cadastro_Livros extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        TxtNomeAutor = new javax.swing.JTextField();
+        txtNomeLivro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtISBN = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jSpinner1 = new javax.swing.JSpinner();
+        QtdeEstoque = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        comboEditora = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,28 +74,23 @@ public class Cadastro_Livros extends javax.swing.JFrame {
 
         jLabel5.setText("Editora");
 
-        jTextField1.setText("Digite o nome do Autor");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TxtNomeAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TxtNomeAutorActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Digite o nome do livro");
-
-        jTextField3.setText("Informe a Editora");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtNomeLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtNomeLivroActionPerformed(evt);
             }
         });
 
         jLabel6.setText("ISBN");
 
-        jTextField5.setText("Digite o ISBN");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtISBNActionPerformed(evt);
             }
         });
 
@@ -89,6 +101,11 @@ public class Cadastro_Livros extends javax.swing.JFrame {
         jLabel7.setText("Quantidade em Estoque");
 
         jButton1.setText("CADASTRAR LIVRO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CANCELAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -108,26 +125,25 @@ public class Cadastro_Livros extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addComponent(jTextField5))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(QtdeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(TxtNomeAutor)
+                            .addComponent(jLabel6)
+                            .addComponent(txtISBN)
                             .addComponent(jLabel7)
-                            .addComponent(jButton2)))
+                            .addComponent(jButton2)
+                            .addComponent(comboEditora, 0, 199, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
+                        .addGap(206, 206, 206)
                         .addComponent(jLabel1)))
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addGap(0, 52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +155,8 @@ public class Cadastro_Livros extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtNomeAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -148,15 +164,15 @@ public class Cadastro_Livros extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel7)
                         .addGap(12, 12, 12)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(QtdeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,21 +184,48 @@ public class Cadastro_Livros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtISBNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtISBNActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtNomeAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomeAutorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_TxtNomeAutorActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+        String isbn = txtISBN.getText();
+        String titulo = txtNomeLivro.getText();
+        String autor = TxtNomeAutor.getText(); 
+        String assunto = jTextArea1.getText(); 
+        Editora editoraSelecionada = (Editora) comboEditora.getSelectedItem(); 
+        int quantidade = (int) QtdeEstoque.getValue(); 
+
+        if (isbn.isBlank() || titulo.isBlank() || autor.isBlank() || editoraSelecionada == null) {
+            JOptionPane.showMessageDialog(this, "Preencha os campos obrigatórios (ISBN, Título, Autor, Editora)!");
+            return;
+        }
+
+        LivroControle controle = new LivroControle();
+        controle.adicionarLivro(isbn, titulo, autor, assunto, editoraSelecionada, quantidade);
+        
+        JOptionPane.showMessageDialog(this, "Livro cadastrado com sucesso!");
+        
+        
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocorreu um erro inesperado ao salvar o livro.", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNomeLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeLivroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeLivroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,6 +253,9 @@ public class Cadastro_Livros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner QtdeEstoque;
+    private javax.swing.JTextField TxtNomeAutor;
+    private javax.swing.JComboBox<Editora> comboEditora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -220,11 +266,8 @@ public class Cadastro_Livros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtISBN;
+    private javax.swing.JTextField txtNomeLivro;
     // End of variables declaration//GEN-END:variables
 }

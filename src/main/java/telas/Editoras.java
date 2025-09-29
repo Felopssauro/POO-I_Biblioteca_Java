@@ -4,6 +4,9 @@
  */
 package telas;
 
+import javax.swing.JOptionPane;
+import controles.EditoraControle;
+
 /**
  *
  * @author thayl
@@ -155,6 +158,27 @@ public class Editoras extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (jTextField1.getText().isBlank() ||
+        jTextField3.getText().isBlank() ||
+        jTextField2.getText().isBlank() ||
+        jTextField4.getText().isBlank()){
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+        return;
+    }
+
+    EditoraControle controle = new EditoraControle();
+    try {
+        controle.adicionarEditora(
+            jTextField1.getText(),
+            jTextField3.getText(),
+            jTextField2.getText(),
+            jTextField4.getText()
+        );
+        JOptionPane.showMessageDialog(this, "Editora cadastrada com sucesso!");
+        dispose();
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

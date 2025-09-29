@@ -10,18 +10,27 @@ package entidades;
  */
 public class Cliente {
     private int ID;
-    //private enum(tipo_pessoa) tipo;
+    private String tipo;
     private String CPF_CNPJ;
     private String nome;
     private String endereco;
-    private String livros_comprados;
+    private String telefone;
 
-    public Cliente(int ID, String CPF_CNPJ, String nome, String endereco, String livros_comprados) {
+    public Cliente(int ID, String tipo, String CPF_CNPJ, String nome, String endereco, String telefone) {
         this.ID = ID;
+        this.tipo = tipo; 
         this.CPF_CNPJ = CPF_CNPJ;
         this.nome = nome;
         this.endereco = endereco;
-        this.livros_comprados = livros_comprados;
+        this.telefone = telefone;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getID() {
@@ -55,13 +64,17 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-
-    public String getLivros_comprados() {
-        return livros_comprados;
+    
+    public String getTelefone() { 
+        return telefone;
     }
 
-    public void setLivros_comprados(String livros_comprados) {
-        this.livros_comprados = livros_comprados;
+    public void setTelefone(String telefone) { 
+        this.telefone = telefone;
     }
     
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }
